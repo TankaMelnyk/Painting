@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Painting</title>
+    <link href="style.css" rel="stylesheet" />
+
+    <script src="https://use.fontawesome.com/5cd54ed10b.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+</head>
+<body><!--      Реализовать рисовалку на canvas    -->
+    <form class="toolBar">
+        <button id="clear" type="button"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+
+        <button id="save" type="button"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+
+        <button id="cliner" type="button"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+        <button id="pen" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+
+        <input type="color" class="color" id="color" />
+        <input type="color" class="color" id="fill-color" value="#b7b7b7" />
+
+        <label for="opacity">
+            <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+            <output id="outputOpacity"></output>
+            <input type="range" id="opacity" min="0.1" max="1" step="0.1" value="1" />
+
+        </label>
+        <label for="size">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+            <output id="outputSize"></output>
+            <input type="range" id="size" min="2" max="40" step="2" value="20" />
+        </label>
+    </form>
+
+    <div class="canvas-border">
+    </div>    
+    <canvas id="canvas" style="height: 500px; width: 760px">
+        У вашего браузера нет поддержки canvas
+    </canvas>
+
+    <script type="text/javascript">
+        /*-----------style---------------------*/
+    function updateOpacity() {
+        var inp = document.querySelector("#opacity");
+        var out = document.querySelector("#outputOpacity");
+        out.textContent = inp.value;
+    }
+    updateOpacity();
+    document.getElementById("opacity").addEventListener("input", updateOpacity);
+
+    function updateSize() {
+        var inp = document.querySelector("#size");
+        var out = document.querySelector("#outputSize");
+        out.textContent = inp.value;
+    }
+    updateSize();
+    document.getElementById("size").addEventListener("input", updateSize);
+
+    function clearSelection() {
+        if (window.getSelection) {
+            window.getSelection().removeAllRanges();
+        } else { // старый IE
+            document.selection.empty();
+        }
+    }
+    document.getElementById("canvas").addEventListener("dblclick", clearSelection);
+    </script>
+</body>
+</html>
